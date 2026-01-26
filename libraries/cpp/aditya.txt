@@ -1,3 +1,4 @@
 Hello
 This is the second line
 This sentence is APPENDED
+Written using constructor-based opening
