@@ -20,7 +20,7 @@ int main() {
 
     // WRITE MODE (overwrite)
     // aditya.txt is created if it does not exist
-    my_file.open("libraries/cpp/aditya.txt", std::ios::out);
+    my_file.open("libraries/cpp/fstream/aditya.txt", std::ios::out);
     if (my_file.is_open()) {
         my_file << "Hello\n";
         my_file << "This is the second line\n";
@@ -28,14 +28,14 @@ int main() {
     }
 
     // APPEND MODE (add to existing content)
-    my_file.open("libraries/cpp/aditya.txt", std::ios::app);
+    my_file.open("libraries/cpp/fstream/aditya.txt", std::ios::app);
     if (my_file.is_open()) {
         my_file << "This sentence is APPENDED\n";
         my_file.close();
     }
 
     // READ MODE (file must exist)
-    my_file.open("libraries/cpp/aditya.txt", std::ios::in);
+    my_file.open("libraries/cpp/fstream/aditya.txt", std::ios::in);
     if (my_file.is_open()) {
         std::string line;
         while (std::getline(my_file, line)) {  // unformatted input
@@ -50,13 +50,13 @@ int main() {
     std::ifstream input_file;   // input only
     std::ofstream output_file;  // output only
 
-    input_file.open("libraries/cpp/input_nums.txt");
+    input_file.open("libraries/cpp/fstream/input_nums.txt");
     if (!input_file.is_open()) {
         std::cout << "Error opening input file" << std::endl;
         return -1;
     }
 
-    output_file.open("libraries/cpp/output_nums.txt");
+    output_file.open("libraries/cpp/fstream/output_nums.txt");
     if (!output_file.is_open()) {
         std::cout << "Error opening output file" << std::endl;
         return -1;
@@ -78,13 +78,13 @@ int main() {
     // constructor-based opening combines creation + opening
     // into a single step and reduces the chance of misuse
 
-    std::ofstream out_file("libraries/cpp/aditya.txt", std::ios::app);
+    std::ofstream out_file("libraries/cpp/fstream/aditya.txt", std::ios::app);
     if (out_file.is_open()) {
         out_file << "Written using constructor-based opening\n";
         out_file.close();  // still allowed, but often unnecessary
     }
 
-    std::ifstream in_file("libraries/cpp/aditya.txt");
+    std::ifstream in_file("libraries/cpp/fstream/aditya.txt");
     if (in_file.is_open()) {
         std::string line;
         while (std::getline(in_file, line)) {
@@ -102,7 +102,7 @@ int main() {
 
     {
         // File is opened when the object is created
-        std::ofstream scoped_out("libraries/cpp/output_nums.txt", std::ios::app);
+        std::ofstream scoped_out("libraries/cpp/fstream/output_nums.txt", std::ios::app);
 
         if (scoped_out) {
             scoped_out << std::fixed << std::setprecision(2);
@@ -113,7 +113,7 @@ int main() {
     }  // scoped_out goes out of scope here -> file is closed automatically
 
     {
-        std::ifstream scoped_in("libraries/cpp/output_nums.txt");
+        std::ifstream scoped_in("libraries/cpp/fstream/output_nums.txt");
 
         if (scoped_in) {
             std::string line;
