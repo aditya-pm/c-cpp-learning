@@ -68,7 +68,7 @@ void character_counting(void) {
     printf("%ld\n", count);
 }
 
-void character_counting_for() {
+void character_counting_for(void) {
     // double is used here only to demonstrate an alternative counting approach.
     // Note: double cannot represent all integers exactly for very large values.
     // C89, double = %f. C99+, double = %lf = %f
@@ -77,9 +77,21 @@ void character_counting_for() {
     printf("%.0f\n", count);
 }
 
+void line_counting(void) {
+    // standard library ensures that an input text stream appears as a sequence of
+    // lines, each terminated by a newline. Hence to count lines, just count newlines.
+    int c, newline_count;
+    newline_count = 0;
+    while ((c = getchar()) != EOF) {
+        if (c == '\n')
+            newline_count++;
+    }
+    printf("%d\n", newline_count);
+}
+
 int main() {
     // copy_file();
-    character_counting();
-
+    // character_counting();
+    line_counting();
     return 0;
 }
