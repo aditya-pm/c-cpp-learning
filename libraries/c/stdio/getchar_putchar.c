@@ -35,11 +35,21 @@ EOF:
 - On terminals, end-of-input is signaled by:
   - Ctrl+D (Linux/macOS)
   - Ctrl+Z then Enter (Windows)
+
+// IMPORTANT:
+// getchar() must be stored in an int, not a char,
+// because it needs to represent all unsigned char values plus EOF.
+
+long:
+- long is guaranteed by the C standard to be at least 32 bits.
+- long is guaranteed to be no smaller than int.
+- On many modern 64-bit Unix systems, long is 64 bits.
+- On Windows (LLP64), long is 32 bits even on 64-bit systems.
 */
 
 #include <stdio.h>
 
-void copy_file() {
+void copy_file(void) {
     int c;
     // in C, every assignment is an expression whose value is LHS
     // () around the assignment is necessary due to != having higher precedence than =
@@ -49,8 +59,27 @@ void copy_file() {
     printf("Loop exited!\n");
 }
 
+void character_counting(void) {
+    // NOTE: \n is counted too
+    long count;
+    count = 0;
+    while (getchar() != EOF)
+        count++;
+    printf("%ld\n", count);
+}
+
+void character_counting_for() {
+    // double is used here only to demonstrate an alternative counting approach.
+    // Note: double cannot represent all integers exactly for very large values.
+    // C89, double = %f. C99+, double = %lf = %f
+    double count;
+    for (count = 0; getchar() != EOF; count++);
+    printf("%.0f\n", count);
+}
+
 int main() {
-    copy_file();
+    // copy_file();
+    character_counting();
 
     return 0;
 }
