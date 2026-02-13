@@ -49,6 +49,9 @@ long:
 
 #include <stdio.h>
 
+#define IN_WORD 1
+#define OUT_WORD 0
+
 void copy_file(void) {
     int c;
     // in C, every assignment is an expression whose value is LHS
@@ -142,11 +145,30 @@ void ex_1_10(void) {
     }
 }
 
+void wc_clone(void) {
+    int c, line_count, word_count, char_count, state;
+
+    state = OUT_WORD;
+    line_count = word_count = char_count = 0;
+    while ((c = getchar()) != EOF) {
+        char_count++;
+        if (c == '\n') line_count++;
+        if (c == ' ' || c == '\n' || c == '\t')
+            state = OUT_WORD;
+        else if (state == OUT_WORD) {
+            state = IN_WORD;
+            word_count++;
+        }
+    }
+    printf("%d %d %d\n", line_count, word_count, char_count);
+}
+
 int main() {
     // copy_file();
     // character_counting();
     // line_counting();
     // ex_1_8();
-    ex_1_10();
+    // ex_1_10();
+    wc_clone();
     return 0;
 }
