@@ -89,9 +89,64 @@ void line_counting(void) {
     printf("%d\n", newline_count);
 }
 
+void ex_1_8(void) {
+    int c, nl, tab, blank;
+
+    nl = tab = blank = 0;
+    while ((c = getchar()) != EOF) {
+        if (c == ' ')
+            ++blank;
+        else if (c == '\n')
+            ++nl;
+        else if (c == '\t')
+            ++tab;
+    }
+
+    printf("blanks: %d\n", blank);
+    printf("tabs: %d\n", tab);
+    printf("newlines: %d\n", nl);
+}
+
+void ex_1_9(void) {
+    int c;
+    int prev_space = 0;  // boolean
+
+    while ((c = getchar()) != EOF) {
+        if (c == ' ') {
+            if (!prev_space)
+                putchar(c);
+            prev_space = 1;
+        } else {
+            putchar(c);
+            prev_space = 0;
+        }
+    }
+}
+
+void ex_1_10(void) {
+    int c;
+
+    while ((c = getchar()) != EOF) {
+        if (c == '\t') {
+            putchar('\\');
+            putchar('t');
+        } else if (c == '\b') {
+            putchar('\\');
+            putchar('b');
+        } else if (c == '\\') {
+            putchar('\\');
+            putchar('\\');
+        } else {
+            putchar(c);
+        }
+    }
+}
+
 int main() {
     // copy_file();
     // character_counting();
-    line_counting();
+    // line_counting();
+    // ex_1_8();
+    ex_1_10();
     return 0;
 }
